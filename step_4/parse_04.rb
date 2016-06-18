@@ -10,6 +10,7 @@ uniq_words = []
 rep_words = {}
 
 in_file = File.new("/home/ssn/RoR_02/Anna_Karenina.txt") 
+o_f = File.new("/home/ssn/RoR_02/step_4/out_01.txt", "w")
 arr_lines = in_file.readlines
 
 arr_lines.each { |l| 
@@ -30,7 +31,15 @@ arr_lines.each { |l|
 		end
 	 }
   }
-puts uniq_words
-puts rep_words
+#o_f.puts uniq_words
+#o_f.puts rep_words
+
+arr_uniq = rep_words.to_a
+arr_uniq.sort { |a,b| a[0] <=> b[0]}
+o_f.puts arr_uniq
+
+#uniq_words_sort = arr_uniq.to_h
+#o_f.puts uniq_words_sort
 
 in_file.close
+o_f.close

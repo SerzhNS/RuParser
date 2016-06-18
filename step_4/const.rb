@@ -20,6 +20,7 @@ module Const
 	"O"=>"o", "P"=>"p", "Q"=>"q", "R"=>"r", "S"=>"s", "T"=>"t", "U"=>"u", "V"=>"v",
 	"W"=>"w", "X"=>"x", "Y"=>"y", "Z"=>"z"}
 	DWTOUP = UPTODW.invert
+	DECL = [:imn, :rod, :dat, :vin, :tvr, :prd]
 
 
 

@@ -3,34 +3,42 @@ class Word < String
 # Outdated class.
 #
 
-=begin
+require_relative "const"
+
 	include Const
 
 	def initialize(a)
 		super
-		@w = a.strip
-		puts @w
 	end
 
 
 	def upcase!
 		super
-		@w.gsub!(/[абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz]/,DWTOUP)
-		@w
+		self.strip!
+		self.gsub!(/[абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz]/,DWTOUP)
+		self
 	end
 
 	def downcase!
 		super
-		@w.gsub!(/[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ]/,UPTODW)
-		@w
+		self.strip!
+		self.gsub!(/[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ]/,UPTODW)
+		self
 	end
 	
 	def capitalize!
 		super
-		@w.gsub!(/^[абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz]/,DWTOUP)
-		@w
+		self.strip!
+		self.gsub!(/^[абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz]/,DWTOUP)
+		self
 	end
-=end
+
+	def uncapitalize!
+		self.strip!
+		self.gsub!(/^[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ]/,UPTODW)
+		self
+	end
+
 
 
 end

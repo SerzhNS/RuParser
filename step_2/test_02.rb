@@ -1,14 +1,19 @@
 #!/usr/bin/ruby
 #encoding utf-8
 
-require_relative 'const' 
-#require_relative 'word'
-require_relative 'string'
+require_relative 'word' 
+#require_relative 'string'
 
 
-
-#a = Word.new("  Привет ")
-a = "   привет "
+a = Word.new("   привет ")
+puts a, a.class
 b = a.capitalize!
-puts b
-puts b.downcase!
+puts b, b.class
+puts b.downcase!, b.class
+
+puts "========="
+a = "   привет "
+puts a, a.class
+b = a.capitalize!
+puts b, b.class
+puts b.downcase!, b.class

@@ -8,6 +8,8 @@ require_relative "word"
 
 uniq_words = []
 rep_words = {}
+new_rep_words = {}
+fr_rep_words = {}
 
 in_file = File.new("/home/ssn/RoR_02/Anna_Karenina.txt") 
 o_f = File.new("/home/ssn/RoR_02/step_4/out_01.txt", "w")
@@ -34,9 +36,13 @@ arr_lines.each { |l|
 #o_f.puts uniq_words
 #o_f.puts rep_words
 
-arr_uniq = rep_words.to_a
-arr_uniq.sort { |a,b| a[0] <=> b[0]}
-o_f.puts arr_uniq
+new_rep_words = rep_words.sort { |a,b| a<=>b }.to_h
+o_f.puts new_rep_words
+o_f.puts ("==========================")
+new_rep_words = rep_words.sort { |a,b| b[1] <=> a[1] }
+fr_rep_words = new_rep_words.to_h
+o_f.puts fr_rep_words
+#o_f.print "+++++++++\n#{new_rep_words}" 
 
 #uniq_words_sort = arr_uniq.to_h
 #o_f.puts uniq_words_sort

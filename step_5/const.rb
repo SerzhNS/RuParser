@@ -22,6 +22,14 @@ module Const
 	DWTOUP = UPTODW.invert
 	DECL = [:imn, :rod, :dat, :vin, :tvr, :prd]
 
+	OTHWORDS = %w/и в да, С В К И Да не до у только также тоже то тут ни как так столько или либо но зато однако
+	же все притом причем именно что бы когда лишь едва где куда откуда настолько такой того такой 
+	потому если коли ежели несмотря хотя хоть пускай чтобы дабы с к на по при со ж еще из/
+
+	# qnty of words to compare with current
+	LEV = 10	
+	# Criterion of comparison 
+	PERC = 0.5	
 
 
 end

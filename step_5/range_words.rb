@@ -16,7 +16,7 @@ fr_rep_words = {}
 
 # ----- initialize input and putput files --------
 in_file = File.new("/home/ssn/RoR_02/Anna_Karenina.txt", "rt:utf-8") 
-o_f = File.new("/home/ssn/RoR_02/step_5/out_05.txt", "w:utf-8")
+o_f = File.new("/home/ssn/RoR_02/step_5/out_06.txt", "w:utf-8")
 
 # ----- select words and put them in orders: a) alfabetic and b) friequency orders 
 arr_lines = Statement.new(in_file.readlines)
@@ -30,11 +30,11 @@ rep_words = arr_lines.split_statements
 # ----- IMPORTANT! Reverse order of words!! ------------
 new_rep_words = rep_words.sort { |a,b| b<=>a }
 #new_rep_words = new_rep_words.to_h
-new_rep_words.each { |e,v| o_f.print "#{e} : #{v}\n" } 
-o_f.puts ("\n\n\n==========================")
+# new_rep_words.each { |e,v| o_f.print "#{e} : #{v}\n" } 
+# o_f.puts ("\n\n\n==========================")
 fr_rep_words = rep_words.sort { |a,b| b[1][:q] <=> a[1][:q] }
 fr_rep_words = fr_rep_words.to_h
-fr_rep_words.each { |e,v| o_f.print "#{e} : #{v}\n" } 
+# fr_rep_words.each { |e,v| o_f.print "#{e} : #{v}\n" } 
 
 # o_f.puts ("\n\n\n+++++++++++++++++++++++++++++++")
 # k = 0
@@ -42,19 +42,23 @@ fr_rep_words.each { |e,v| o_f.print "#{e} : #{v}\n" }
 
 # ----- determine a root/base of a word ---------------------
 wrd_base = {}
+arr_size = new_rep_words.size
 
-new_rep_words.each_index do |w|
+# new_rep_words.each_index do |w|
+w = 0
+loop do 
 	arr_c = []
 	j_c = 0
 	h = {}
+	# ----- take LEV next words after this one and compare to find common root ----
 	Const::LEV.times do |wn|
 		a = new_rep_words[w][0]
 		new_rep_words[w+wn+1].nil? ? break : b = new_rep_words[w+wn+1][0]
 		c = a.compare(b)
-#		puts ": #{a} - #{b} - #{c}" 	# temp
+		puts ": #{a} - #{b} - #{c}" 	# temp
 		if !c.nil?
 		 	prc = c.to_f / a.size.to_f
-		 	if prc >= Const::PERC 
+		 	if prc >= Const::PERC && a.size > 3	&& b.size.to_f / a.size.to_f <= 1.0	# criterion of commonality these words --
 		 		arr_c[j_c] = c
 		 		j_c += 1 
 			else
@@ -64,15 +68,19 @@ new_rep_words.each_index do |w|
 		 	break
 		 end 
 	end
-	unless arr_c.empty?
-		min_l = arr_c.min
-		d = new_rep_words[w][0].to_s[0..min_l]
-#		puts arr_c, d 	# temp
-		wrd_base[d] = {:q => 0, :t => [], :s => []}
+	unless arr_c.empty?		# ----- list of words thar have a proximity  ---
+		min_l = arr_c.min 	# ----- the root with min length -----
+		d = new_rep_words[w][0].to_s[0..min_l-1]
+		puts "-- #{arr_c} -- #{d}" # ? #{new_rep_words[w]}"  # temp
+
+# ----- join all words with the same base -------------
+		wrd_base[d] = {:q => 1, :t => [new_rep_words[w][0]], :s => [new_rep_words[w][1][:s]]}
+#		wrd_base[d] = {:q => 0, :t => [], :s => []}
+	#	puts "wrd_base : #{wrd_base[d]}"	# temp
 		n1 = 0
 		l1 = []
 		j_c.times do |n|
-			h = new_rep_words[w+n].to_a	# temp
+			h = new_rep_words[w+n+1].to_a	# temp
 			h1 = h[1].to_a
 #			puts "=== #{h} : #{h1}"	# temp
 			wrd_base[d][:t] << h[0]
@@ -81,8 +89,9 @@ new_rep_words.each_index do |w|
 			l1 << h1[1][1] 
 			wrd_base[d][:s] = l1
 		end
-		w += j_c
 	end
+	w += j_c > 0 ? j_c + 1 : 1 
+	break if w >= 150 || w >= arr_size
 end
 
 o_f.puts ("\n\n\n______________________________________")

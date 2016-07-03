@@ -58,6 +58,8 @@ require_relative "const"
 			if self[ch] == w[ch]
 				cmp = 0 if cmp.nil?
 				cmp += 1
+			else
+				break	
 			end
 		end
 		return cmp

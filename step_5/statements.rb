@@ -4,6 +4,7 @@
 class Statement < Array
 
 require_relative "word"
+require_relative "morph"
 
 	def initialize(a)
 		super
@@ -28,17 +29,20 @@ require_relative "word"
 			end
 			j_snt += 1
 		end
-		return rep_words		
+		return rep_words arr_tmp		
 	end
 
 	# ----- min of the values in the list -------
-	def minval
-		super
-		a = 1000000
-		self.each do |e|
-			a = e if a <= e
+	def sindex(base)
+		k = 0
+		self.each do |el|
+			if el.coins?(base)
+				k += 1
+				return k 
+			else
+				return nill
+			end
 		end
-		return a
 	end
 	
 end

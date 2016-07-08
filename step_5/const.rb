@@ -26,10 +26,15 @@ module Const
 	же все притом причем именно что бы когда лишь едва где куда откуда настолько такой того такой 
 	потому если коли ежели несмотря хотя хоть пускай чтобы дабы с к на по при со ж еще из/
 
+	PREF = %w/при пре пере взо вы до за из изо на над не недо обо от ото па по под подо пра пред предо про 
+	разо без бес вз вс воз вос ис низ нис раз рас роз рос через черес/
+
 	# qnty of words to compare with current
 	LEV = 10	
 	# Criterion of comparison 
 	PERC = 0.5	
+	# A range of the most friequent word following this one to detect their conjanction --
+	DEPTH = 5 
 
 
 end
